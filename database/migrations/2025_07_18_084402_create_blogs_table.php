@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('title');
             $table->text('content');
+            $table->unsignedInteger('claps')->default(0);
         });
     }
 

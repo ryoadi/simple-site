@@ -19,6 +19,7 @@ class BlogFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'content' => $this->faker->paragraphs(10, true),
+            'claps' => $this->faker->numberBetween(0, 100),
         ];
     }
 }
