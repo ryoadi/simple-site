@@ -21,6 +21,11 @@
                     :current="request()->routeIs('about')" wire:navigate>
                     {{ __('About') }}
                 </flux:navbar.item>
+
+                <flux:navbar.item icon="layout-grid" :href="url('contact')"
+                    :current="request()->routeIs('contact')" wire:navigate>
+                    {{ __('Contact') }}
+                </flux:navbar.item>
             </flux:navbar>
 
             <flux:spacer />
