@@ -13,14 +13,18 @@ new class extends Component {
 }; ?>
 
 <div>
-    <h2 class="text-2xl font-bold mb-4">Favorite Blogs</h2>
-    <ul>
-        @foreach($blogs as $blog)
-            <li>
-                <a href="{{ url("/blogs/{$blog->id}") }}" class="hover:underline">
-                    <h3 class="text-lg font-bold mb-3">{{ $blog->title }}</h3>
-                </a>
-            </li>
-        @endforeach
-    </ul>
+    <flux:heading level="2" size="lg">{{ __('Favorite Blogs') }}</flux:heading>
+    <flux:separator class="mt-2 mb-4" />
+
+    <flux:text>
+        <ul class="space-y-2">
+            @foreach($blogs as $blog)
+                <li>
+                    <flux:link href='{{ url("/blogs/{$blog->id}") }}' variant="ghost" wire:navigate>
+                        {{ $blog->title }}
+                    </flux:link>
+                </li>
+            @endforeach
+        </ul>
+    </flux:text>
 </div>

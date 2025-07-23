@@ -1,14 +1,12 @@
 <x-layouts.app :title="__($blog->title)">
-    <div class="container mx-auto flex">
-        <main class="px-4 py-8 w-3/4">
-            <h1 class="text-3xl font-bold mb-4">{{ $blog->title }}</h1>
-            <p class="mb-4">{!! nl2br($blog->content) !!}</p>
+    <flux:heading level="1" size="xl">{{ $blog->title }}</flux:heading>
+    <flux:separator class="mt-2 mb-4" />
 
-            <livewire:blogs.clap :blog="$blog" />
-        </main>
+    <flux:text class="mb-4">{!! nl2br($blog->content) !!}</flux:text>
 
-        <aside class="px-4 py-8 w-1/4">
-            <livewire:blogs.favorites />
-        </aside>
-    </div>
+    <livewire:blogs.clap :blog="$blog" />
+
+    <x-slot:aside>
+        <livewire:blogs.favorites />
+    </x-slot:aside>
 </x-layouts.app>

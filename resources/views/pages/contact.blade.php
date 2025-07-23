@@ -21,35 +21,25 @@ new class extends Component {
 
 <x-layouts.app :title="__('Contact Us')">
     @volt
-    <div class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-4">Contact Us</h1>
-        
-        @if (session()->has('success'))
-            <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
-                Thank you for your message! We will get back to you soon.
-            </div>
-        @endif
+        <main>
+            <flux:heading level="1" size="xl">{{ __('Contact Us') }}</flux:heading>
+            <flux:separator class="mt-2 mb-4" />
+            
+            @if (session()->has('success'))
+                <flux:callout variant="success" 
+                    icon="check-circle"
+                    heading="{{ __('Thank you for your message! We will get back to you soon.') }}" 
+                    class="mb-4"
+                />
+            @endif
 
-        <form wire:submit.prevent="submit" class="space-y-4">
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-300">Email</label>
-                <input type="email" id="email" wire:model.lazy="email" 
-                       class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500">
-                @error('email') <span class="text-red-600">{{ $message }}</span> @enderror
-            </div>
+            <form wire:submit.prevent="submit" class="space-y-4">
+                <flux:input type="email" label="{{ __('Email') }}" wire:model.lazy="email" />
 
-            <div>
-                <label for="message" class="block text-sm font-medium text-gray-300">Message</label>
-                <textarea id="message" wire:model.lazy="message" 
-                          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
-                @error('message') <span class="text-red-600">{{ $message }}</span> @enderror
-            </div>
+                <flux:textarea label="{{ __('Message') }}" wire:model.lazy="message" />
 
-            <button type="submit" 
-                    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                Send Message
-            </button>
-        </form>
-    </div>
+                <flux:button variant="primary" type="submit">{{ __('Send Message') }}</flux:button>
+            </form>
+        </main>
     @endvolt
 </x-layouts.app>

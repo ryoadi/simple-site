@@ -24,42 +24,42 @@ new class extends Component {
 }; ?>
 
 <x-layouts.app :title="__('Blogs')">
-    <div class="container mx-auto flex">
-        @volt
-            <main class="px-4 py-8 w-3/4">
-                <div class="flex items-center justify-between mb-6">
-                    <h1 class="text-3xl font-bold mb-4">{{ __('Blogs') }}</h1>
+    @volt
+        <main>
+            <div class="flex items-center justify-between">
+                <flux:heading level="1" size="xl">{{ __('Blogs') }}</flux:heading>
 
-                    <form wire:submit.prevent>
-                        <input type="text" 
-                            wire:model.live.debounce="keyword" 
-                            placeholder="{{ __('Search blogs...') }}" 
-                            class="px-4 py-2 rounded w-full mb-4"
-                        >
-                    </form>
-                </div>
-                
+                <form wire:submit.prevent>
+                    <flux:input
+                        type="search"
+                        wire:model.live.debounce="keyword" 
+                        placeholder="{{ __('Search blogs...') }}" 
+                    />
+                </form>    
+            </div>
+            <flux:separator class="mt-2 mb-4" />
 
-                @if($blogs->isEmpty())
-                    <p class="text-gray-500">{{ __('No blogs found.') }}</p>
-                @else
-                    <ul class="space-y-4">
+            @if($blogs->isEmpty())
+                <flux:text variant="subtle">{{ __('No blogs found.') }}</flux:text>
+            @else
+                <flux:text size="lg">
+                    <ul class="space-y-2 mb-4">
                         @foreach($blogs as $blog)
                             <li>
-                                <a href="{{ url("blogs/{$blog->id}") }}" class="hover:underline">
-                                    <h2 class="text-xl font-bold mb-4">{{ $blog->title }}</h2>
-                                </a>
+                                <flux:link href='{{ url("blogs/{$blog->id}") }}' variant="ghost" wire:navigate>
+                                    {{ $blog->title }}
+                                </flux:link>
                             </li>
                         @endforeach
                     </ul>
+                </flux:text>
 
-                    {{ $blogs->links() }}
-                @endif
-            </main>
-        @endvolt
+                {{ $blogs->links() }}
+            @endif
+        </main>
+    @endvolt
 
-        <aside class="px-4 py-8 w-1/4">
-            <livewire:blogs.favorites />
-        </aside>
-    </div>
+    <x-slot:aside>
+        <livewire:blogs.favorites />
+    </x-slot:aside>
 </x-layouts.app>
